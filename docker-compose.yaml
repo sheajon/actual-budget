@@ -1,0 +1,19 @@
+services:
+  actual-budget:
+    image: actualbudget/actual-server:latest-alpine
+    container_name: actual_budget
+    restart: unless-stopped
+    environment:
+      ACTUAL_PASSWORD_HASH: ${ACTUAL_PASSWORD_HASH}
+    volumes:
+      - ./data:/data
+    networks:
+      - actualnet
+    expose:
+      - "5006"
+    ports:
+      - "5006:5006"
+
+networks:
+  actualnet:
+    driver: bridge
